@@ -34,18 +34,21 @@ function validatePassword(){console.log(passwordInput.value);}
 function validateConfirmPassword(){console.log(confirmPasswordInput.value);}
 
 
-usernameInput.addEventListener("change", function(){
+
+//with input as the event type each keystroke log the value
+//with change as the event type the value is logged
+usernameInput.addEventListener("input", function(){
     validateUsername();
 })
 
-usernameInput.addEventListener("change", function(){
-    validateUsername();
+emailInput.addEventListener("change", function(){
+    validateEmail();
 })
 
-usernameInput.addEventListener("change", function(){
-    validateUsername();
+passwordInput.addEventListener("change", function(){
+    validatePassword();
 })
 
 confirmPasswordInput.addEventListener("change", function(){
-    validateUsername();
+    validateConfirmPassword();
 })
