@@ -22,7 +22,20 @@ const confirmPasswordError = document.getElementById("confirm-password-error");
 // console.log(confirmPasswordError);
 
 
-function validateUsername(){console.log(usernameInput.value);}
+/* because I have minlength="4" and required propeties on the input
+   when logging th validity object you can see valueMissing and 
+   tooShort flip between true and false as I type
+ */
+function validateUsername(){
+    // console.log(usernameInput.validity);
+
+    //handle if value is missing
+    console.log(`Value Missing: ${usernameInput.validity.valueMissing}`);
+
+    //handle short username
+    console.log(`Too Short: ${usernameInput.validity.tooShort}`);
+
+}
 
 
 function validateEmail(){console.log(emailInput.value);}
@@ -36,7 +49,7 @@ function validateConfirmPassword(){console.log(confirmPasswordInput.value);}
 
 
 //with input as the event type each keystroke log the value
-//with change as the event type the value is logged
+//with change as the event type the value is logged when you leave the input or press enter
 usernameInput.addEventListener("input", function(){
     validateUsername();
 })
