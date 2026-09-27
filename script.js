@@ -170,7 +170,7 @@ if (formValid){
     alert("Form Submitted")
     localStorage.setItem("username", usernameInput.value);
     form.reset();
-
+    [usernameInput, emailInput, passwordInput, confirmPasswordInput].forEach(input => input.classList.remove("touched"));
 
     /* this line allows the name to reappear right after submitting
     it is commented out because I am not sure if I am suppose to do this
