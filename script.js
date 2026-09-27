@@ -26,7 +26,7 @@ const confirmPasswordError = document.getElementById("confirm-password-error");
    tooShort flip between true and false as I type
  */
 function validateUsername() {
-        // console.log(usernameInput.validity);
+    // console.log(usernameInput.validity);
 
     //for the username input a user could only enter space and 
     // the input will accept it, this if statement checks for that
@@ -34,32 +34,39 @@ function validateUsername() {
     if (usernameInput.value.length > 0 && usernameInput.value.trim() === ""){
         usernameInput.setCustomValidity("Enter a username, not just spaces");
     } else {
-        usernameInput.setCustomValidity("")
-    }
+        usernameInput.setCustomValidity("");
+    };
 
 
 
-    //handle short username
-    if (usernameInput.validity.tooShort){
-        usernameError.innerText = "Username must be at least 4 characters"
-    } else if (usernameInput.validity.valueMissing){
-        usernameError.innerText = "Username is required"
-    } else if (usernameInput.validity.customError){
-        usernameError.innerText = usernameInput.validationMessage
+    //Validation Messages
+    if (usernameInput.validity.tooShort){//handle short username
+        usernameError.innerText = "Username must be at least 4 characters";
+    } else if (usernameInput.validity.valueMissing){//handle missing username
+        usernameError.innerText = "Username is required";
+    } else if (usernameInput.validity.customError){//handle username with only spaces
+        usernameError.innerText = usernameInput.validationMessage;
     } else {
-         usernameError.innerText = ""
-    }
+         usernameError.innerText = "";
+    };
 
 
+};
+
+function validateEmail(){
+    //Something like .com or .org is not required so in the html 
+    // I added the pattern="[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}" will not allow something like Email@Email
+    if (emailInput.validity.valueMissing){//handle missing email
+        emailError.innerText = "Email is required";
+    } else if (emailInput.validity.patternMismatch) {//handle invalid email
+         emailError.innerText = "Please enter a valid email address.";
+    } else {
+        emailError.innerText = ""
+    };
+
+    console.log(emailInput.value);
 }
 
-
-
-
-function validateEmail() {
-
-  console.log(emailInput.value);
-}
 
 function validatePassword() {
   console.log(passwordInput.value);
@@ -76,7 +83,7 @@ usernameInput.addEventListener("input", function () {
     validateUsername();
 });
 
-emailInput.addEventListener("change", function () {
+emailInput.addEventListener("input", function () {
   validateEmail();
 });
 
