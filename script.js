@@ -163,18 +163,19 @@ const formFieldsValuesArr = Object.values(formFields);//returns an array of the 
 //Fully Valid Form: check if all values are true
 const formValid = formFieldsValuesArr.every(field => field === true);//if every value in the array is true, this returns true
 
+const firstInvalidfield = form.querySelector(":invalid");//return first invalid field
+
+
 if (formValid){
     alert("Form Submitted")
     localStorage.setItem("username", usernameInput.value);
     form.reset();
-} else {
- 
-
-const firstInvalidfield = form.querySelector(":invalid");//return first invalid field
-//If any field is invalid, focus on the first invalid field.
-if (firstInvalidfield){
+} else if (firstInvalidfield){//If any field is invalid, focus on the first invalid field.
     firstInvalidfield.focus();
 };
+ 
+
+
 
 
 
