@@ -18,4 +18,24 @@
         - [X] Display a success message (e.g., an alert or update a status message on the page).
         - [X] Save the username to localStorage.
         - [X] Optionally, reset the form.
-    - [ ] If any field is invalid, ensure error messages are displayed and focus on the first invalid field.
+    - [X] If any field is invalid, ensure error messages are displayed and focus on the first invalid field.
+
+
+---
+
+## Testing and Validation Checklist
+- [X] Test Basic Registration: Fill out all fields with valid data and submit the form. Verify the success message and that the username is saved in localStorage (check your browser’s Developer Tools > Application > Local Storage).
+- [X] Test Username Validation:
+    - [X] Try submitting with an empty username.
+    - [X] Enter a username that is too short.
+    - [X] Verify error messages appear in real-time as you type (or on blur/submit).
+- [X] Test Email Validation:
+    - [X] Try submitting with an empty email.
+    - [X] Enter an invalid email format (e.g., “test@”, “test.com”).
+- [X] Test Password Validation:
+    - [X] Try submitting with an empty password.
+    - [X] Enter a password that is too short.
+    - [X] Enter a password that doesn’t meet the pattern (e.g., all lowercase, no numbers).
+    - [X] Ensure the “Confirm Password” field shows an error if it doesn’t match the password.
+- [X] Test Local Storage Persistence: After a successful registration, refresh the page. The username field should be pre-filled with the value you entered.
+- [ ] Edge Cases: Think about what happens if a user tries to bypass validation (though client-side validation is mainly for UX, server-side is for security). What happens if  localStorage is full or disabled (for this lab, we assume it works, but it’s a real-world consideration)?

@@ -10,16 +10,13 @@ const emailError = document.getElementById("email-error");
 const passwordError = document.getElementById("password-error");
 const confirmPasswordError = document.getElementById("confirm-password-error");
 
-// console.log(form);
-// console.log(usernameInput);
-// console.log(passwordInput);
-// console.log(confirmPasswordInput);
-// console.log(registerButton);
 
-// console.log(usernameError);
-// console.log(emailError);
-// console.log(passwordError);
-// console.log(confirmPasswordError);
+
+//have the username input prefill with username saved in localstorage
+const savedUsername = localStorage.getItem("username");
+if (savedUsername){
+    usernameInput.value = savedUsername
+}
 
 /* because I have minlength="4" and required propeties on the input
    when logging the validity object you can see valueMissing and 
