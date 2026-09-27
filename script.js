@@ -26,16 +26,31 @@ const confirmPasswordError = document.getElementById("confirm-password-error");
    tooShort flip between true and false as I type
  */
 function validateUsername() {
+        // console.log(usernameInput.validity);
+
+    //for the username input a user could only enter space and 
+    // the input will accept it, this if statement checks for that
+    //set custom rule, usernameInput.validationMessage will hold the result
+    if (usernameInput.value.length > 0 && usernameInput.value.trim() === ""){
+        usernameInput.setCustomValidity("Enter a username, not just spaces");
+    } else {
+        usernameInput.setCustomValidity("")
+    }
+
+
 
     //handle short username
     if (usernameInput.validity.tooShort){
         usernameError.innerText = "Username must be at least 4 characters"
-    } 
-
-    //handle if value is missing
-    if (usernameInput.validity.valueMissing){
+    } else if (usernameInput.validity.valueMissing){
         usernameError.innerText = "Username is required"
-    } 
+    } else if (usernameInput.validity.customError){
+        usernameError.innerText = usernameInput.validationMessage
+    } else {
+         usernameError.innerText = ""
+    }
+
+
 }
 
 
@@ -59,10 +74,6 @@ function validateConfirmPassword() {
 // you leave the input or press enter
 usernameInput.addEventListener("input", function () {
     validateUsername();
-    //for the username input a user could only enter space and 
-    // the input will accept it, this if statement checks for that
-    // usernameError.innerText = usernameInput.value.length > 0 && usernameInput.value.trim() === "" ? 
-    // usernameInput.setCustomValidity("Enter a username, not just spaces") : usernameInput.setCustomValidity("");
 });
 
 emailInput.addEventListener("change", function () {
