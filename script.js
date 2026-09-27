@@ -22,7 +22,7 @@ const confirmPasswordError = document.getElementById("confirm-password-error");
 // console.log(confirmPasswordError);
 
 /* because I have minlength="4" and required propeties on the input
-   when logging th validity object you can see valueMissing and 
+   when logging the validity object you can see valueMissing and 
    tooShort flip between true and false as I type
  */
 function validateUsername() {
@@ -50,6 +50,8 @@ function validateUsername() {
          usernameError.innerText = "";
     };
 
+    // console.log(usernameInput.validity.valid);
+    return usernameInput.validity.valid//returns true if field is valid and false if it is not valid
 
 };
 
@@ -64,7 +66,8 @@ function validateEmail(){
         emailError.innerText = ""
     };
 
-    // console.log(emailInput.value);
+    // console.log(emailInput.validity.valid);
+    return emailInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
 
@@ -94,12 +97,11 @@ function validatePassword() {
     if (confirmPasswordInput.value){
         validateConfirmPassword();
     }
-//   console.log(passwordInput.value);
+    //console.log(passwordInput.validity.valid);
+    return passwordInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
 function validateConfirmPassword() {
-
-
     //The browser do not know that the confirm password field must match the password field
     // so it does not mark it invalid when the two field do not match
     //setting setCustomValidity() with a string that is not empty will mark the field invalid
@@ -109,8 +111,7 @@ function validateConfirmPassword() {
         confirmPasswordInput.setCustomValidity("");//clears the custom error
     };
 
-
-    console.log(passwordInput.value);
+    // console.log(passwordInput.value);
     if (confirmPasswordInput.validity.valueMissing){//handle missing password
         confirmPasswordError.innerText = "Please re-enter your password to confirm";
     } else if (confirmPasswordInput.validity.customError) {//handle when password does not match, check for the custom error
@@ -118,7 +119,8 @@ function validateConfirmPassword() {
     } else {
         confirmPasswordError.innerText = "";
     }
-  console.log(confirmPasswordInput.value);
+    //console.log(confirmPasswordInput.validity.valid);
+    return confirmPasswordInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
 //with input as the event type each keystroke log the value
@@ -143,4 +145,15 @@ confirmPasswordInput.addEventListener("input", function () {
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   console.log("Submitted");
+
+  //find out if the fields are valid
+  const usernameFieldValid = validateUsername();
+  const emailFieldValid = validateEmail();
+  const passwordFieldValid = validatePassword();
+  const confirmPasswordFieldValid = validateConfirmPassword();
+
+  console.log(usernameFieldValid);
+  console.log(emailFieldValid);
+  console.log(passwordFieldValid);
+  console.log(confirmPasswordFieldValid);
 });
