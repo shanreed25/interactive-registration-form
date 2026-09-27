@@ -15,6 +15,13 @@ const confirmPasswordError = document.getElementById("confirm-password-error");
    when logging the validity object you can see valueMissing and 
    tooShort flip between true and false as I type
  */
+    //after restting the form have the username input prefill with username saved in localstorage
+const savedUsername = localStorage.getItem("username");
+ if (savedUsername){
+    usernameInput.value = savedUsername
+}
+
+
 function validateUsername() {
     // console.log(usernameInput.validity);
 
@@ -160,23 +167,16 @@ if (formValid){
     alert("Form Submitted")
     localStorage.setItem("username", usernameInput.value);
     form.reset();
-    //after restting the form have the username input prefill with username saved in localstorage
-    const savedUsername = localStorage.getItem("username");
-    if (savedUsername){
-        usernameInput.value = savedUsername
-    }
-} else {//If any field is invalid, focus on the first invalid field.
-    if (!usernameFieldValid){
-        usernameInput.focus();
-    } else if (!emailFieldValid){
-        emailInput.focus();
-    } else if (!passwordFieldValid){
-        passwordInput.focus();
-    } else if (!confirmPasswordFieldValid){
-        confirmPasswordInput.focus();
-    }
-    console.log(formFields);
-}
+} else {
+ 
+
+const firstInvalidfield = form.querySelector(":invalid");//return first invalid field
+//If any field is invalid, focus on the first invalid field.
+if (firstInvalidfield){
+    firstInvalidfield.focus();
+};
+
+
 
 
 
