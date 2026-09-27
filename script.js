@@ -23,7 +23,7 @@ const savedUsername = localStorage.getItem("username");
 
 
 function validateUsername() {
-    // console.log(usernameInput.validity);
+    usernameInput.classList.add("touched");
 
     //for the username input a user could only enter space and 
     // the input will accept it, this if statement checks for that
@@ -33,8 +33,6 @@ function validateUsername() {
     } else {
         usernameInput.setCustomValidity("");
     };
-
-
 
     //Validation Messages
     if (usernameInput.validity.tooShort){//handle short username
@@ -48,11 +46,12 @@ function validateUsername() {
     };
 
     // console.log(usernameInput.validity.valid);
-    return usernameInput.validity.valid//returns true if field is valid and false if it is not valid
+    return usernameInput.validity.valid;//returns true if field is valid and false if it is not valid
 
 };
 
 function validateEmail(){
+    emailInput.classList.add("touched");
     //Something like .com or .org is not required so in the html 
     // I added the pattern="[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}" will not allow something like Email@Email
     if (emailInput.validity.valueMissing){//handle missing email
@@ -63,12 +62,12 @@ function validateEmail(){
         emailError.innerText = ""
     };
 
-    // console.log(emailInput.validity.valid);
     return emailInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
 
 function validatePassword() {
+    passwordInput.classList.add("touched");
     if (passwordInput.validity.valueMissing){//handle missing password
         passwordError.innerText = "Password is required";
     } else if (passwordInput.validity.tooShort) {//handle password too short
@@ -84,7 +83,6 @@ function validatePassword() {
         } else {
             passwordError.innerText = ""
         }
-        //  passwordError.innerText = "Wait";
     } else {
         passwordError.innerText = ""
     };
@@ -94,11 +92,13 @@ function validatePassword() {
     if (confirmPasswordInput.value){
         validateConfirmPassword();
     }
-    //console.log(passwordInput.validity.valid);
+
     return passwordInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
 function validateConfirmPassword() {
+    confirmPasswordInput.classList.add("touched");
+
     //The browser do not know that the confirm password field must match the password field
     // so it does not mark it invalid when the two field do not match
     //setting setCustomValidity() with a string that is not empty will mark the field invalid
@@ -108,7 +108,7 @@ function validateConfirmPassword() {
         confirmPasswordInput.setCustomValidity("");//clears the custom error
     };
 
-    // console.log(passwordInput.value);
+
     if (confirmPasswordInput.validity.valueMissing){//handle missing password
         confirmPasswordError.innerText = "Please re-enter your password to confirm";
     } else if (confirmPasswordInput.validity.customError) {//handle when password does not match, check for the custom error
@@ -116,7 +116,7 @@ function validateConfirmPassword() {
     } else {
         confirmPasswordError.innerText = "";
     }
-    //console.log(confirmPasswordInput.validity.valid);
+
     return confirmPasswordInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
@@ -140,7 +140,7 @@ confirmPasswordInput.addEventListener("input", function () {
 });
 
 form.addEventListener("submit", function (e) {
-  e.preventDefault();
+  e.preventDefault();//this stops the browser's default submit behavior, which is why when I submit the form the page does not reload on its own
   console.log("Submitted");
 
   //find out if the fields are valid, each one returns true of false
@@ -170,6 +170,15 @@ if (formValid){
     alert("Form Submitted")
     localStorage.setItem("username", usernameInput.value);
     form.reset();
+
+
+    /* this line allows the name to reappear right after submitting
+    it is commented out because I am not sure if I am suppose to do this
+    for this lab
+    */
+    // usernameInput.value = savedUsername;
+
+
 } else if (firstInvalidfield){//If any field is invalid, focus on the first invalid field.
     firstInvalidfield.focus();
 };
