@@ -26,19 +26,23 @@ const confirmPasswordError = document.getElementById("confirm-password-error");
    tooShort flip between true and false as I type
  */
 function validateUsername() {
-  // console.log(usernameInput.validity);
 
-  //handle if value is missing, moved into the form listener
-  //because i never see the error when it is here
-  // const valueMissingValue = usernameInput.validity.valueMissing;
-  // usernameError.innerText= valueMissingValue ? "Username is required" : "";
+    //handle short username
+    if (usernameInput.validity.tooShort){
+        usernameError.innerText = "Username must be at least 4 characters"
+    } 
 
-  //handle short username
-  const tooShortValue = usernameInput.validity.tooShort;
-  usernameError.innerText = tooShortValue ? "Username must be at least 4 characters" : "";
+    //handle if value is missing
+    if (usernameInput.validity.valueMissing){
+        usernameError.innerText = "Username is required"
+    } 
 }
 
+
+
+
 function validateEmail() {
+
   console.log(emailInput.value);
 }
 
@@ -53,8 +57,12 @@ function validateConfirmPassword() {
 //with input as the event type each keystroke log the value
 //with change as the event type the value is logged when
 // you leave the input or press enter
-usernameInput.addEventListener("change", function () {
-  validateUsername();
+usernameInput.addEventListener("input", function () {
+    validateUsername();
+    //for the username input a user could only enter space and 
+    // the input will accept it, this if statement checks for that
+    // usernameError.innerText = usernameInput.value.length > 0 && usernameInput.value.trim() === "" ? 
+    // usernameInput.setCustomValidity("Enter a username, not just spaces") : usernameInput.setCustomValidity("");
 });
 
 emailInput.addEventListener("change", function () {
@@ -71,6 +79,4 @@ confirmPasswordInput.addEventListener("change", function () {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  const valueMissingValue = usernameInput.validity.valueMissing;
-  usernameError.innerText = valueMissingValue ? "Username is required" : "";
 });
