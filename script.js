@@ -11,13 +11,6 @@ const passwordError = document.getElementById("password-error");
 const confirmPasswordError = document.getElementById("confirm-password-error");
 
 
-
-//have the username input prefill with username saved in localstorage
-const savedUsername = localStorage.getItem("username");
-if (savedUsername){
-    usernameInput.value = savedUsername
-}
-
 /* because I have minlength="4" and required propeties on the input
    when logging the validity object you can see valueMissing and 
    tooShort flip between true and false as I type
@@ -167,6 +160,11 @@ if (formValid){
     alert("Form Submitted")
     localStorage.setItem("username", usernameInput.value);
     form.reset();
+    //after restting the form have the username input prefill with username saved in localstorage
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername){
+        usernameInput.value = savedUsername
+    }
 } else {//If any field is invalid, focus on the first invalid field.
     if (!usernameFieldValid){
         usernameInput.focus();
