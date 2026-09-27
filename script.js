@@ -27,13 +27,26 @@ const confirmPasswordError = document.getElementById("confirm-password-error");
    tooShort flip between true and false as I type
  */
 function validateUsername(){
+    const valueMissing = usernameInput.validity.valueMissing;
+    const tooShort = usernameInput.validity.tooShort;
     // console.log(usernameInput.validity);
 
     //handle if value is missing
     console.log(`Value Missing: ${usernameInput.validity.valueMissing}`);
+    if (valueMissing){
+        usernameError.innerText = "Username is required";
+    } else {
+        usernameError.innerText = "";
+    }
+
 
     //handle short username
     console.log(`Too Short: ${usernameInput.validity.tooShort}`);
+    if (tooShort){
+        usernameError.innerText = "Username must be at least 4 characters";
+    } else {
+        usernameError.innerText = "";
+    }
 
 }
 
