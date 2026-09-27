@@ -31,12 +31,21 @@ try{
 
 
 
-/* because I have minlength="4" and required propeties on the input
+
+
+//Validates the username field
+function validateUsername() {
+    /* because I have minlength="4" and required propeties on the input
    when logging the validity object you can see valueMissing and 
    tooShort flip between true and false as I type
  */
 
-function validateUsername() {
+   /* the CSS :invalid rule makes empty required fields red before the user types anything
+        could use :user-invalid because with it the browser applies the border after the 
+        user has interacted with a input, but tested this I found that the borders do not
+        appear, when I submit an empty form that has not been interacted with, so I
+        added touched class to the input to handle the red borders on page load
+    */
     usernameInput.classList.add("touched");
 
     //for the username input a user could only enter space and 
@@ -64,6 +73,7 @@ function validateUsername() {
 
 };
 
+//Validates the email field
 function validateEmail(){
     emailInput.classList.add("touched");
     //Something like .com or .org is not required so in the html 
@@ -79,7 +89,7 @@ function validateEmail(){
     return emailInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
-
+//Validates the password field
 function validatePassword() {
     passwordInput.classList.add("touched");
     if (passwordInput.validity.valueMissing){//handle missing password
@@ -110,6 +120,7 @@ function validatePassword() {
     return passwordInput.validity.valid//returns true if field is valid and false if it is not valid
 }
 
+//Validates the confirm password field
 function validateConfirmPassword() {
     confirmPasswordInput.classList.add("touched");
 
@@ -137,22 +148,29 @@ function validateConfirmPassword() {
 //with input as the event type each keystroke log the value
 //with change as the event type the value is logged when
 // you leave the input or press enter
+
+// username listener
 usernameInput.addEventListener("input", function () {
     validateUsername();
 });
 
+//email listener
 emailInput.addEventListener("input", function () {
   validateEmail();
 });
 
+//password listener
 passwordInput.addEventListener("input", function () {
   validatePassword();
 });
 
+//confirm password listener
 confirmPasswordInput.addEventListener("input", function () {
   validateConfirmPassword();
 });
 
+
+//Form listener
 form.addEventListener("submit", function (e) {
   e.preventDefault();//this stops the browser's default submit behavior, which is why when I submit the form the page does not reload on its own
   console.log("Submitted");
@@ -189,6 +207,10 @@ if (formValid){
     }
     
     form.reset();
+
+    /*once the form is resets the fields then become empty again so
+    the touched class needs to be removed from all inputs
+    */
     [usernameInput, emailInput, passwordInput, confirmPasswordInput].forEach(input => input.classList.remove("touched"));
 
     /* this line allows the name to reappear right after submitting
