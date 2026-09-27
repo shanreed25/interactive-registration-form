@@ -64,12 +64,31 @@ function validateEmail(){
         emailError.innerText = ""
     };
 
-    console.log(emailInput.value);
+    // console.log(emailInput.value);
 }
 
 
 function validatePassword() {
-  console.log(passwordInput.value);
+    if (passwordInput.validity.valueMissing){//handle missing password
+        passwordError.innerText = "Password is required";
+    } else if (passwordInput.validity.tooShort) {//handle password too short
+         passwordError.innerText = "Password must be at least 8 characters long.";
+    } else if (passwordInput.validity.patternMismatch) {//handle invalid email
+        // console.log(/[A-Z]/.test(passwordInput.value))
+        if (!/[A-Z]/.test(passwordInput.value)){//if the value does not contain a uppercase letter
+            passwordError.innerText = "Password must include a uppercase letter";
+        } else if (!/[a-z]/.test(passwordInput.value)){//if the value does not contain a lowercase letter
+            passwordError.innerText = "Password must include a lowercase letter";
+        } else if (!/\d/.test(passwordInput.value)){//if the value does not contain a number
+            passwordError.innerText = "Password must include a number";
+        } else {
+            passwordError.innerText = ""
+        }
+        //  passwordError.innerText = "Wait";
+    } else {
+        passwordError.innerText = ""
+    };
+//   console.log(passwordInput.value);
 }
 
 function validateConfirmPassword() {
@@ -87,7 +106,7 @@ emailInput.addEventListener("input", function () {
   validateEmail();
 });
 
-passwordInput.addEventListener("change", function () {
+passwordInput.addEventListener("input", function () {
   validatePassword();
 });
 
