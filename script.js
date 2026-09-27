@@ -146,14 +146,31 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
   console.log("Submitted");
 
-  //find out if the fields are valid
+  //find out if the fields are valid, each one returns true of false
   const usernameFieldValid = validateUsername();
   const emailFieldValid = validateEmail();
   const passwordFieldValid = validatePassword();
   const confirmPasswordFieldValid = validateConfirmPassword();
 
-  console.log(usernameFieldValid);
-  console.log(emailFieldValid);
-  console.log(passwordFieldValid);
-  console.log(confirmPasswordFieldValid);
+  //creating a form fields object
+const formFields = {
+    usernameField: usernameFieldValid,
+    emailField: emailFieldValid,
+    passwordField: passwordFieldValid,
+    confirmPasswordField: confirmPasswordFieldValid,
+}
+
+//get all the values
+const validValuesArr = Object.values(formFields);//returns an array of the objects values something like [true, true, false, false]
+
+//check if all values are true
+const allFieldsValid = validValuesArr.every(field => field === true);//if every value in the array is not true, this returns false
+
+console.log(allFieldsValid);
+
+console.log(formFields);
+//   console.log(usernameFieldValid);
+//   console.log(emailFieldValid);
+//   console.log(passwordFieldValid);
+//   console.log(confirmPasswordFieldValid);
 });
