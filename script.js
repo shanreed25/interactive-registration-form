@@ -92,6 +92,14 @@ function validatePassword() {
 }
 
 function validateConfirmPassword() {
+    console.log(passwordInput.value);
+    if (confirmPasswordInput.validity.valueMissing){//handle missing password
+        confirmPasswordError.innerText = "Please re-enter your password to confirm";
+    } else if (passwordInput.value !== confirmPasswordInput.value) {//handle when password does not match
+        confirmPasswordError.innerText = "Password does not match";
+    } else {
+        confirmPasswordError.innerText = "";
+    }
   console.log(confirmPasswordInput.value);
 }
 
@@ -110,7 +118,7 @@ passwordInput.addEventListener("input", function () {
   validatePassword();
 });
 
-confirmPasswordInput.addEventListener("change", function () {
+confirmPasswordInput.addEventListener("input", function () {
   validateConfirmPassword();
 });
 
