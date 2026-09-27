@@ -161,16 +161,18 @@ const formFields = {
 }
 
 //get all the values
-const validValuesArr = Object.values(formFields);//returns an array of the objects values something like [true, true, false, false]
+const formFieldsValuesArr = Object.values(formFields);//returns an array of the objects values something like [true, true, false, false]
 
-//check if all values are true
-const allFieldsValid = validValuesArr.every(field => field === true);//if every value in the array is not true, this returns false
+//Fully Valid Form: check if all values are true
+const formValid = formFieldsValuesArr.every(field => field === true);//if every value in the array is true, this returns true
 
-console.log(allFieldsValid);
+if (formValid){
+    alert("Form Submitted")
+    form.reset();
+}
 
-console.log(formFields);
-//   console.log(usernameFieldValid);
-//   console.log(emailFieldValid);
-//   console.log(passwordFieldValid);
-//   console.log(confirmPasswordFieldValid);
+
+
+console.log(formValid);
+
 });

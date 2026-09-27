@@ -12,10 +12,10 @@
     - [X] For the “Confirm Password” field, explicitly check if it matches the “Password” field.
     - [X] Display appropriate custom error messages in the corresponding <span> elements. Clear messages if valid.
 - [X] Form submission: Add a submit event listener to the form.
-    - [ ] Call event.preventDefault().
-    - [ ] Perform a final validation check on all fields.
-    - [ ] If all fields are valid:
-        - [ ] Display a success message (e.g., an alert or update a status message on the page).
+    - [X] Call event.preventDefault().
+    - [X] Perform a final validation check on all fields.
+    - [X] If all fields are valid:
+        - [X] Display a success message (e.g., an alert or update a status message on the page).
         - [ ] Save the username to localStorage.
-        - [ ] Optionally, reset the form.
+        - [X] Optionally, reset the form.
     - [ ] If any field is invalid, ensure error messages are displayed and focus on the first invalid field.
