@@ -88,6 +88,12 @@ function validatePassword() {
     } else {
         passwordError.innerText = ""
     };
+
+    //if the user goes back and chhanges the password after confirming the password
+    //this will recheck the confirm password field only if it has a value
+    if (confirmPasswordInput.value){
+        validateConfirmPassword();
+    }
 //   console.log(passwordInput.value);
 }
 
