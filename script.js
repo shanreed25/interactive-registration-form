@@ -11,16 +11,30 @@ const passwordError = document.getElementById("password-error");
 const confirmPasswordError = document.getElementById("confirm-password-error");
 
 
+
+/*after restting the form have the username input prefill with 
+username saved in localstorage, but local storage can be blocked 
+or full, because this code is at the top level, which means it runs
+when the page loads, if this trows an error the rest of the code would not run
+fixing this by wrapping it in a try/catch block
+*/
+try{
+    // throw new Error("test");//this can be used to force the failure
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername){
+        usernameInput.value = savedUsername;
+    } 
+} catch(err) {
+ console.warn("Could not load username, error");
+}
+
+
+
+
 /* because I have minlength="4" and required propeties on the input
    when logging the validity object you can see valueMissing and 
    tooShort flip between true and false as I type
  */
-    //after restting the form have the username input prefill with username saved in localstorage
-const savedUsername = localStorage.getItem("username");
- if (savedUsername){
-    usernameInput.value = savedUsername
-}
-
 
 function validateUsername() {
     usernameInput.classList.add("touched");
@@ -168,7 +182,12 @@ const firstInvalidfield = form.querySelector(":invalid");//return first invalid 
 
 if (formValid){
     alert("Form Submitted")
-    localStorage.setItem("username", usernameInput.value);
+    try {
+        localStorage.setItem("username", usernameInput.value);
+    } catch (err) {
+        console.log("Could not load username, error");
+    }
+    
     form.reset();
     [usernameInput, emailInput, passwordInput, confirmPasswordInput].forEach(input => input.classList.remove("touched"));
 
