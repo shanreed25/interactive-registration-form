@@ -44,7 +44,7 @@ function validateUsername() {
         usernameError.innerText = "Username must be at least 4 characters";
     } else if (usernameInput.validity.valueMissing){//handle missing username
         usernameError.innerText = "Username is required";
-    } else if (usernameInput.validity.customError){//handle username with only spaces
+    } else if (usernameInput.validity.customError){//handle username with only spaces, check for custom error
         usernameError.innerText = usernameInput.validationMessage;
     } else {
          usernameError.innerText = "";
@@ -92,11 +92,23 @@ function validatePassword() {
 }
 
 function validateConfirmPassword() {
+
+
+    //The browser do not know that the confirm password field must match the password field
+    // so it does not mark it invalid when the two field do not match
+    //setting setCustomValidity() with a string that is not empty will mark the field invalid
+    if (passwordInput.value !== confirmPasswordInput.value){
+        confirmPasswordInput.setCustomValidity("Password does not match");
+    } else {
+        confirmPasswordInput.setCustomValidity("");//clears the custom error
+    };
+
+
     console.log(passwordInput.value);
     if (confirmPasswordInput.validity.valueMissing){//handle missing password
         confirmPasswordError.innerText = "Please re-enter your password to confirm";
-    } else if (passwordInput.value !== confirmPasswordInput.value) {//handle when password does not match
-        confirmPasswordError.innerText = "Password does not match";
+    } else if (confirmPasswordInput.validity.customError) {//handle when password does not match, check for the custom error
+        confirmPasswordError.innerText = confirmPasswordInput.validationMessage;
     } else {
         confirmPasswordError.innerText = "";
     }
