@@ -168,7 +168,19 @@ const formValid = formFieldsValuesArr.every(field => field === true);//if every 
 
 if (formValid){
     alert("Form Submitted")
+    localStorage.setItem("username", usernameInput.value);
     form.reset();
+} else {//If any field is invalid, focus on the first invalid field.
+    if (!usernameFieldValid){
+        usernameInput.focus();
+    } else if (!emailFieldValid){
+        emailInput.focus();
+    } else if (!passwordFieldValid){
+        passwordInput.focus();
+    } else if (!confirmPasswordFieldValid){
+        confirmPasswordInput.focus();
+    }
+    console.log(formFields);
 }
 
 
