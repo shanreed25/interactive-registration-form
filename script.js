@@ -184,7 +184,8 @@ form.addEventListener("submit", function (e) {
   const passwordFieldValid = validatePassword();
   const confirmPasswordFieldValid = validateConfirmPassword();
 
-  //creating a form fields object
+  //creating a form fields object with a true or false value for 
+  // each input that indicates if the field is valid or not
   const formFields = {
     usernameField: usernameFieldValid,
     emailField: emailFieldValid,
